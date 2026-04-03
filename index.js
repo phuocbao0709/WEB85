@@ -47,18 +47,16 @@ const app = http.createServer((request, response) => {
   }
 
   //B5: lọc sản phẩm theo giá min và max
-  //B5: lọc sản phẩm theo giá min và max
   if (url.startsWith("/products") && method === "GET") {
     const fullUrl = new URL(request.url, `http://${request.headers.host}`);
     const minPrice = fullUrl.searchParams.get("minPrice");
     const maxPrice = fullUrl.searchParams.get("maxPrice");
 
-    // Nếu không truyền 1 trong 2 tham số, trả về toàn bộ sản phẩm
     if (!minPrice || !maxPrice) {
       response.end(JSON.stringify(products));
       return;
     }
-    // Chuyển đổi sang số và lọc
+
     const min = Number(minPrice);
     const max = Number(maxPrice);
 
